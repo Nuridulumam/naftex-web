@@ -21,9 +21,9 @@
     <hr class="sidebar-divider" />
 
     <!-- Heading -->
-    <div class="sidebar-heading">Informasi</div>
+    <div class="sidebar-heading">Profile</div>
 
-    <!-- Nav Item - Bio -->
+    <!-- Nav Item - Rpofile -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-users"></i>
@@ -37,22 +37,27 @@
             </div>
         </div>
     </li>
+    <hr class="sidebar-divider" />
 
-    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- Heading -->
+    <div class="sidebar-heading">Informasi</div>
+    <!-- Nav Item - Rulebook -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-money-bill-wave"></i>
-            <span>Pembayaran</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#downloads" aria-expanded="true" aria-controls="downloads">
+            <i class="fas fa-fw fa-download"></i>
+            <span>Petunjuk Lomba</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="downloads" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Halaman Pembayaran:</h6>
-                <a class="collapse-item" href="utilities-color.html">Formulir Pembayaran</a>
-                <a class="collapse-item" href="utilities-color.html">Status Pembayaran</a>
-                <a class="collapse-item" href="utilities-border.html">Cara Pembayaran</a>
+                <h6 class="collapse-header">Halaman Petunjuk lomba:</h6>
+                <a class="collapse-item" href="buttons.html">Rulebook</a>
+                <a class="collapse-item" href="cards.html">Petunjuk Pelaksanaan</a>
+                <a class="collapse-item" href="cards.html">Rundown</a>
             </div>
         </div>
     </li>
+
+
 
     <!-- Divider -->
     <hr class="sidebar-divider" />
@@ -73,13 +78,47 @@
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Halaman Biodata Tim:</h6>
                 <a class="collapse-item" href="404.html">Formulir Ketua Tim</a>
-                <a class="collapse-item" href="blank.html">Formulir Anggota Tim '1'</a>
-                <a class="collapse-item" href="blank.html">Formulir Anggota Tim '2'</a>
-                <a class="collapse-item" href="blank.html">Formulir Anggota Tim '3'</a>
+                <a class="collapse-item" href="blank.html">Formulir Anggota Tim 1</a>
+                <a class="collapse-item" href="blank.html">Formulir Anggota Tim 2</a>
+            </div>
+        </div>
+    </li>
+    <!-- Nav Item - Pembayaran Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-money-bill-wave"></i>
+            <span>Pembayaran</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Halaman Pembayaran:</h6>
+                <a class="collapse-item" href="utilities-color.html">Formulir Pembayaran</a>
+                <a class="collapse-item" href="utilities-color.html">Status Pembayaran</a>
+                <a class="collapse-item" href="utilities-border.html">Cara Pembayaran</a>
             </div>
         </div>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider" />
+
+    <!-- Heading -->
+    <div class="sidebar-heading">Upload</div>
+    <!-- Nav Item - Upload Berkas -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dokumenupload" aria-expanded="true" aria-controls="dokumenupload">
+            <i class="fas fa-fw fa-money-bill-wave"></i>
+            <span>Dokumen Upload</span>
+        </a>
+        <div id="dokumenupload" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Halaman dokumen:</h6>
+                <a class="collapse-item" href="utilities-color.html">Upload Proposal</a>
+                <a class="collapse-item" href="utilities-color.html">Upload Surat Keterangan</a>
+                <a class="collapse-item" href="utilities-border.html">Upload KTM</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block" />
 
