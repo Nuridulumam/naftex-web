@@ -69,17 +69,13 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-file-pdf"></i>
-            <span>Data Pendaftaran</span>
+            <span>Biodata Tim</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Halaman Pendaftaran:</h6>
-                <a class="collapse-item" href="register.html">Formulir Pendaftaran</a>
-                <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Halaman Biodata Tim:</h6>
-                <a class="collapse-item" href="404.html">Formulir Ketua Tim</a>
-                <a class="collapse-item" href="blank.html">Formulir Anggota Tim 1</a>
-                <a class="collapse-item" href="blank.html">Formulir Anggota Tim 2</a>
+                <a class="collapse-item" href="formulir.php">Formulir Biodata</a>
+                <div class="collapse-divider"></div>
             </div>
         </div>
     </li>
@@ -92,8 +88,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Halaman Pembayaran:</h6>
-                <a class="collapse-item" href="utilities-color.html">Formulir Pembayaran</a>
-                <a class="collapse-item" href="utilities-color.html">Status Pembayaran</a>
+                <a class="collapse-item" href="formulir-pembayaran.php">Formulir Pembayaran</a>
+                <a class="collapse-item" href="status-pembayaran.php">Status Pembayaran</a>
                 <a class="collapse-item" href="utilities-border.html">Cara Pembayaran</a>
             </div>
         </div>
