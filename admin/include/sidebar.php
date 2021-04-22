@@ -7,8 +7,6 @@
         </div>
         <div class="sidebar-brand-text mx-3">Project <sup>NAFTEX</sup></div>
     </a>
-
-    <!-- Divider -->
     <hr class="sidebar-divider my-0" />
 
     <!-- Nav Item - Dashboard -->
@@ -16,13 +14,10 @@
         <a class="nav-link" href="index.php">
             <span>Dashboard</span></a>
     </li>
-
-    <!-- Divider -->
     <hr class="sidebar-divider" />
 
     <!-- Heading -->
-    <div class="sidebar-heading">Profile</div>
-
+    <!-- <div class="sidebar-heading">Profile</div> -->
     <!-- Nav Item - Rpofile -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -37,10 +32,10 @@
             </div>
         </div>
     </li>
-    <hr class="sidebar-divider" />
+    <!-- <hr class="sidebar-divider" /> -->
 
     <!-- Heading -->
-    <div class="sidebar-heading">Informasi</div>
+    <!-- <div class="sidebar-heading">Informasi</div> -->
     <!-- Nav Item - Rulebook -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#downloads" aria-expanded="true" aria-controls="downloads">
@@ -56,15 +51,10 @@
             </div>
         </div>
     </li>
-
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider" />
+    <!-- <hr class="sidebar-divider" /> -->
 
     <!-- Heading -->
-    <div class="sidebar-heading">Pendaftaran</div>
-
+    <!-- <div class="sidebar-heading">Pendaftaran</div> -->
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -94,12 +84,10 @@
             </div>
         </div>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider" />
+    <!-- <hr class="sidebar-divider" /> -->
 
     <!-- Heading -->
-    <div class="sidebar-heading">Upload</div>
+    <!-- <div class="sidebar-heading">Upload</div> -->
     <!-- Nav Item - Upload Berkas -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dokumenupload" aria-expanded="true" aria-controls="dokumenupload">

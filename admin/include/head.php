@@ -16,4 +16,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .nav-item .nav-link {padding-top: 10px !important; padding-bottom: 10px !important}
+    </style>
 </head>
