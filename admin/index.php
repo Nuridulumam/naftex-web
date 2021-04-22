@@ -1,3 +1,13 @@
+<?php  
+    include('../koneksi/koneksi.php'); 
+    include('include/session.php');
+    $sql_n = "SELECT `nama` FROM `user` WHERE `id_user`='$id_user'";
+    $query_n = mysqli_query($koneksi, $sql_n);
+    while($data_n = mysqli_fetch_row($query_n)){ 
+      $nama = $data_n[0]; 
+    }  
+?> 
+
 <?php include "include/head.php" ?>
 
 <body id="page-top">
@@ -15,7 +25,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Selamat Datang, <?= $nama ?></h1>
 
                 </div>
                 <!-- /.container-fluid -->
