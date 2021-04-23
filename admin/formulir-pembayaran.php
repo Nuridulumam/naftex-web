@@ -1,5 +1,10 @@
+<?php  
+    include('../koneksi/koneksi.php'); 
+    include('include/session.php');
+?>
+<!DOCTYPE html>
+<html lang="en">
 <?php include "include/head.php" ?>
-
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -17,26 +22,36 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-money-check-alt"></i> Formulir Pembayaran</h1>
 
-                    <div class="container mt-2 card bg-light shadow p-5">
+                    <div class="container mt-2 mb-5 card bg-light shadow p-5">
                         <div class="row justify-content-center">
                             <div class="col-md-6 p-3 rounded-lg">
+                                <?php
+                                    $sql_d   = "SELECT `id_lomba` FROM `data_peserta` WHERE `id_user`='$id_user'";
+                                    $query_d = mysqli_query($koneksi,$sql_d);
+                                    while ($data_d = mysqli_fetch_row($query_d)) {$id_lomba   = $data_d[0];}
+                                    $sql_l   = "SELECT `nama` FROM `data_lomba` WHERE `id_lomba`='$id_lomba'";
+                                    $query_l = mysqli_query($koneksi,$sql_l);
+                                    while ($data_l = mysqli_fetch_row($query_l)) {$nama_lomba = $data_l[0];}
+                                ?>
                                 <form>
+                                    <div class="alert alert-primary mt-3" role="alert">Pastikan semua data sudah diisi dengan benar!</div>
                                     <div class="form-group">
-                                        <label for="nama">Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="nama" placeholder="Example input placeholder">
+                                        <label for="nama">Nama Tim</label>
+                                        <input type="text" class="form-control" id="nama" name="nama" placeholder="<?= $nama ?>" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tim">Nama Tim</label>
-                                        <input type="text" class="form-control" id="tim" placeholder="Another input placeholder">
+                                        <label for="id_lomba">Jenis Lomba</label>
+                                        <input type="text" class="form-control" id="id_lomba" name="id_lomba" placeholder="<?= $nama_lomba ?>" disabled>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="tim">Mata Lomba</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
+                                    <div>
+                                        <?php
+                                        if      ($id_user>=1&&$id_user<=9)   {$biaya="Rp. 100.00".$id_user; }
+                                        else if ($id_user>=10&&$id_user<=99) {$biaya="Rp. 100.0".$id_user; }
+                                        ?>
+                                        <p>Biaya Pendaftaran : </p>
+                                        <h3><?= $biaya ?></h3>
                                     </div>
-                                    <div class="form-row">
+                                    <!-- <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="inputCity">Nomor Rekening</label>
                                             <input type="text" class="form-control" id="inputCity">
@@ -48,7 +63,7 @@
                                                 <option>...</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="btn btn-info float-right">Bayar</div>
                                 </form>
                             </div>
@@ -68,26 +83,11 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <?php include "include/script.php" ?>
+    <?php include "include/script.php" ?>
+
 </body>
 
 </html>

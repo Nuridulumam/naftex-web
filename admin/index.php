@@ -1,15 +1,10 @@
 <?php  
     include('../koneksi/koneksi.php'); 
-    include('include/session.php');
-    $sql_n = "SELECT `nama` FROM `user` WHERE `id_user`='$id_user'";
-    $query_n = mysqli_query($koneksi, $sql_n);
-    while($data_n = mysqli_fetch_row($query_n)){ 
-      $nama = $data_n[0]; 
-    }  
+    include('include/session.php');  
 ?> 
-
+<!DOCTYPE html>
+<html lang="en">
 <?php include "include/head.php" ?>
-
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -37,26 +32,11 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <?php include "include/script.php" ?>
+    <?php include "include/script.php" ?>
+
 </body>
 
 </html>

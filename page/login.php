@@ -1,3 +1,26 @@
+<?php 
+  include ('../koneksi/koneksi.php');
+  if (isset($_POST["login"],$_POST["username"],$_POST["password"])) {
+      $username = $_POST["username"];
+      $password = MD5($_POST["password"]);
+
+      //cek username dan password 
+      $sql = "SELECT `id_user`, `level` FROM `user` WHERE `username`='$username' and `password`='$password'";
+      $query = mysqli_query($koneksi, $sql); 
+      $jumlah = mysqli_num_rows($query);
+
+      if ($jumlah==1) {
+        session_start(); 
+          while($data = mysqli_fetch_row($query)){ 
+              $id_user = $data[0];
+              $level = $data[1];
+              $_SESSION['id_user']=$id_user; 
+              $_SESSION['level']=$level; 
+              header("Location:../admin/index.php"); 
+          } 
+      } else {$gagal=1;}
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,27 +55,32 @@
                     <div class="text-center">
                       <h1 class="h4 text-gray-900 mb-4"><b>Selamat datang di Portal Naftex</b></h1>
                     </div>
-                    <form class="user">
+                    <form class="user" method="post">
                       <div class="form-group">
                         <input type="username" class="form-control form-control-user" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Masukkan Username" name="username" />
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Masukkan Password" name="password" />
                       </div>
-                      <div class="form-group">
+                      <?php
+                        if (isset($gagal)&&$gagal=="1") {?>
+                          <p class="text-danger text-center">Username/Password Salah!</p>
+                        <?php }
+                      ?>
+                      <!-- <div class="form-group">
                         <div class="custom-control custom-checkbox small">
                           <input type="checkbox" class="custom-control-input" id="customCheck" />
                           <label class="custom-control-label" for="customCheck">Simpan Data</label>
                         </div>
-                      </div>
-                      <a href="index.html" class="btn btn-primary btn-user btn-block" name="login"> Login </a>
+                      </div> -->
+                      <button type="submit" name="login" class="btn btn-primary btn-user btn-block">Login</button>
                     </form>
                     <hr />
                     <div class="text-center">
-                      <a class="small" href="forgot-password.html">Lupa Password?</a>
+                      <a class="small" href="forgot-password.php">Lupa Password?</a>
                     </div>
                     <div class="text-center">
-                      <a class="small" href="register.html"><b>Daftar Program Naftex</b></a>
+                      <a class="small" href="register.php"><b>Daftar Program Naftex</b></a>
                     </div>
                   </div>
                 </div>

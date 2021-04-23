@@ -1,5 +1,46 @@
+<?php  
+    include('../koneksi/koneksi.php'); 
+    include('include/session.php'); 
+    if (isset($_POST["submit-anggota1"])) {
+        if (!empty($_POST["nama1"])&&!empty($_POST["wa1"])&&!empty($_POST["univ1"])&&!empty($_POST["ttl1"])&&!empty($_POST["alamat1"])) {
+            $nama   =$_POST["nama1"];
+            $wa     =$_POST["wa1"];
+            $univ   =$_POST["univ1"];
+            $ttl    =$_POST["ttl1"];
+            $alamat =$_POST["alamat1"];
+            $sql_u = "UPDATE `data_peserta` SET `nama1`='$nama',`wa1`='$wa',`univ1`='$univ',`ttl1`='$ttl',`alamat1`='$alamat' WHERE `id_user`='$id_user'";
+            mysqli_query($koneksi,$sql_u);
+            $notif = "berhasil";
+        } else {$notif = "gagal";}
+    }
+    if (isset($_POST["submit-anggota2"])) {
+        if (!empty($_POST["nama2"])&&!empty($_POST["wa2"])&&!empty($_POST["univ2"])&&!empty($_POST["ttl2"])&&!empty($_POST["alamat2"])) {
+            $nama   =$_POST["nama2"];
+            $wa     =$_POST["wa2"];
+            $univ   =$_POST["univ2"];
+            $ttl    =$_POST["ttl2"];
+            $alamat =$_POST["alamat2"];
+            $sql_u = "UPDATE `data_peserta` SET `nama2`='$nama',`wa2`='$wa',`univ2`='$univ',`ttl2`='$ttl',`alamat2`='$alamat' WHERE `id_user`='$id_user'";
+            mysqli_query($koneksi,$sql_u);
+            $notif = "berhasil";
+        } else {$notif = "gagal";}
+    }
+    if (isset($_POST["submit-anggota1"])) {
+        if (!empty($_POST["nama3"])&&!empty($_POST["wa3"])&&!empty($_POST["univ3"])&&!empty($_POST["ttl3"])&&!empty($_POST["alamat3"])) {
+            $nama   =$_POST["nama3"];
+            $wa     =$_POST["wa3"];
+            $univ   =$_POST["univ3"];
+            $ttl    =$_POST["ttl3"];
+            $alamat =$_POST["alamat3"];
+            $sql_u = "UPDATE `data_peserta` SET `nama3`='$nama',`wa3`='$wa',`univ3`='$univ',`ttl3`='$ttl',`alamat3`='$alamat' WHERE `id_user`='$id_user'";
+            mysqli_query($koneksi,$sql_u);
+            $notif = "berhasil";
+        } else {$notif = "gagal";}
+    }
+?> 
+<!DOCTYPE html>
+<html lang="en">
 <?php include "include/head.php" ?>
-
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -18,6 +59,14 @@
                     <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-users"></i> Formulir Biodata Tim</h1>
 
                     <div class="container mt-2 card shadow p-5">
+                        <?php 
+                            if (isset($notif)&&$notif=="berhasil") { ?>
+                               <div class="alert alert-success mt-3" role="alert"> Data Berhasil di Simpan!</div>
+                            <?php } else if (isset($notif)&&$notif=="gagal") { ?>
+                                <div class="alert alert-danger mt-3" role="alert"> Data Gagal di Simpan!</div>
+                            <?php }
+                        ?>
+                        
                         <div class="row justify-content-center">
                             <div class="col-md-12">
                                 <!-- Nav tabs -->
@@ -25,9 +74,9 @@
                                     <div class="col-3">
                                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Get Started</a>
-                                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Biodata Ketua</a>
-                                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Biodata Anggota 1</a>
-                                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Biodata Anggota 2</a>
+                                            <a class="nav-link" id="v-pills-anggota1-tab" data-toggle="pill" href="#v-pills-anggota1" role="tab" aria-controls="v-pills-profile" aria-selected="false">Biodata Anggota 1</a>
+                                            <a class="nav-link" id="v-pills-anggota2-tab" data-toggle="pill" href="#v-pills-anggota2" role="tab" aria-controls="v-pills-messages" aria-selected="false">Biodata Anggota 2</a>
+                                            <a class="nav-link" id="v-pills-anggota3-tab" data-toggle="pill" href="#v-pills-anggota3" role="tab" aria-controls="v-pills-settings" aria-selected="false">Biodata Anggota 3</a>
                                         </div>
                                     </div>
 
@@ -41,56 +90,52 @@
                                                     <p class="font-weight-normal">Seluruh data yang disampaikan kepada panitia harus memenuhi persyaratan yang ada.</p>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                                <h4 class="h5 p-3 rounded font-weight-bold shadow text-dark">Biodata Ketua Tim</h4>
-                                                <hr class="sidebar-divider">
-                                                <form class="shadow p-3 rounded">
+                                            
+                                            <?php
+                                                $anggota = [1,2,3];
+                                                foreach ($anggota as $i) {    
+                                                    $sql_a = "SELECT `nama$i`,`wa$i`,`univ$i`,`ttl$i`,`alamat$i` FROM `data_peserta` WHERE `id_user`='$id_user'";
+                                                    $query_a = mysqli_query($koneksi,$sql_a);
+                                                    while($data_a = mysqli_fetch_row($query_a)){ 
+                                                        $nama   = $data_a[0];
+                                                        $wa     = $data_a[1];
+                                                        $univ   = $data_a[2];
+                                                        $ttl    = $data_a[3];
+                                                        $alamat = $data_a[4]; 
+                                            ?>
+                                            <div class="tab-pane fade" id="v-pills-anggota<?= $i ?>" role="tabpanel" aria-labelledby="v-pills-anggota<?= $i ?>-tab">
+                                                <form class="shadow p-3 rounded" method="post">
+                                                    <h4 class="h5 rounded font-weight-bold text-dark">Biodata Anggota <?= $i ?> <?php if($i=="1"){echo "(Ketua)";} ?></h4>
+                                                    <hr class="sidebar-divider">
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                            <label for="inputusername">Nama Depan</label>
-                                                            <input type="text" class="form-control" id="inputusername">
+                                                            <label for="nama<?= $i ?>">Nama Lengkap</label>
+                                                            <input type="text" name="nama<?= $i ?>" class="form-control" id="nama<?= $i ?>" maxlength="50" value="<?= $nama ?>" required>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label for="inputtim">Nama Belakang</label>
-                                                            <input type="text" name="tim" class="form-control" id="inputtim">
+                                                            <label for="wa<?= $i ?>">No Whatsapp</label>
+                                                            <input type="text" name="wa<?= $i ?>" class="form-control" id="wa<?= $i ?>" maxlength="15" value="<?= $wa ?>" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inputnama">Universitas</label>
-                                                        <input type="text" name="nama" class="form-control" id="inputnama">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="jenislomba">Tanggal Lahir</label>
-                                                        <input type="text" name="jenis-lomba" class="form-control" id="jenislomba">
+                                                        <label for="univ<?= $i ?>">Universitas</label>
+                                                        <input type="text" name="univ<?= $i ?>" class="form-control" id="univ<?= $i ?>" maxlength="50" value="<?= $univ ?>" required>
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="inputuniv">Alamat Lengkap</label>
-                                                            <input type="text" name="universitas" class="form-control" id="inputuniv">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="ttl<?= $i ?>">Tanggal Lahir</label>
+                                                            <input type="text" name="ttl<?= $i ?>" class="form-control" id="ttl<?= $i ?>" maxlength="15" value="<?= $ttl ?>" required>
                                                         </div>
-                                                        <div class="form-group col-md-3">
-                                                            <label for="inputCity">Kota/Kabupaten</label>
-                                                            <select id="inputprovinsi" name="kota" class="form-control">
-                                                                <option selected>Choose...</option>
-                                                                <option>...</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-3">
-                                                            <label for="inputprovinsi">Provinsi</label>
-                                                            <select id="inputprovinsi" name="provinsi" class="form-control">
-                                                                <option selected>Choose...</option>
-                                                                <option>...</option>
-                                                            </select>
+                                                        <div class="form-group col-md-8">
+                                                            <label for="alamat<?= $i ?>">Alamat Lengkap</label>
+                                                            <input type="text" name="alamat<?= $i ?>" class="form-control" id="alamat<?= $i ?>" maxlength="100" value="<?= $alamat ?>" required>
                                                         </div>
                                                     </div>
-                                                    <div class="alert alert-success mt-3" role="alert">
-                                                        Data Berhasil di Simpan!
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    <button type="submit" name="submit-anggota<?= $i ?>" class="btn btn-primary">Simpan</button>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                                            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                                            <?php } } ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -108,26 +153,11 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <?php include "include/script.php" ?>
+    <?php include "include/script.php" ?>
+
 </body>
 
 </html>

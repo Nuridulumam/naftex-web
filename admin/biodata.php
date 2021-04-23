@@ -1,5 +1,23 @@
+<?php  
+    include('../koneksi/koneksi.php'); 
+    include('include/session.php');
+    if (isset($_POST["submit"])) {
+        if (!empty($_POST["nama"])&&!empty($_POST["email"])&&!empty($_POST["id_lomba"])) {
+            $nama_baru       = $_POST["nama"];
+            $email_baru      = $_POST["email"];
+            $id_lomba_baru   = $_POST["id_lomba"];
+            //echo $email.$id_lomba;
+            $sql_u = "UPDATE `user` SET `nama`='$nama_baru',`email`='$email_baru' WHERE `id_user`='$id_user'";
+            mysqli_query($koneksi,$sql_u);
+            $sql_v = "UPDATE `data_peserta` SET `id_lomba`='$id_lomba_baru' WHERE `id_user`='$id_user'";
+            mysqli_query($koneksi,$sql_v);
+            $notif = "berhasil";
+        } else {$notif = "gagal";}
+    }
+?> 
+<!DOCTYPE html>
+<html lang="en">
 <?php include "include/head.php" ?>
-
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -22,50 +40,59 @@
                             <div class="col-md-3">
                                 <img src="img/undraw_profile.svg" alt="foto-profile" width="170px">
                                 <a href="#" class="btn btn-circle bg-light" style="margin: -50px 0 0 110px; position: relative; z-index: 1;"><i class="fas fa-edit "></i></a>
-                                <h6 class="h6"> ID : XCJW48</h6>
+                                <h6 class="h6"> ID : <?= "100".$id_user ?></h6>
                             </div>
                             <div class="col-md-7">
-                                <form>
+                                <?php
+                                    $sql_d = "SELECT `user`.`nama`,`user`.`username`,`user`.`email`,`data_peserta`.`id_lomba` FROM `user` INNER JOIN `data_peserta` ON `user`.`id_user`=`data_peserta`.`id_user`";
+                                    $query_d = mysqli_query($koneksi,$sql_d);
+                                    while ($data_d = mysqli_fetch_row($query_d)) {
+                                        $nama       = $data_d[0];
+                                        $username   = $data_d[1];
+                                        $email      = $data_d[2];
+                                        $id_lomba   = $data_d[3];
+                                    }
+                                ?>
+                                <?php 
+                                    //$notif = "berhasil";
+                                    if (isset($notif)&&$notif=="berhasil") { ?>
+                                       <div class="alert alert-success mt-3" role="alert"> Data Berhasil di Simpan!</div>
+                                    <?php } else if (isset($notif)&&$notif=="gagal") { ?>
+                                        <div class="alert alert-danger mt-3" role="alert"> Data Gagal di Simpan!</div>
+                                    <?php }
+                                ?>
+                                <form method="post">   
+                                    <div class="form-group">
+                                        <label for="nama">Nama Tim</label>
+                                        <input type="text" name="nama" class="form-control" id="inputnama" value="<?= $nama ?>">
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputusername">Username</label>
-                                            <input type="text" class="form-control" id="inputusername" placeholder="nuridulumam" disabled>
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" id="username" placeholder="<?= $username ?>" disabled>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="inputtim">Nama Tim</label>
-                                            <input type="text" name="tim" class="form-control" id="inputtim" placeholder="Tim Till Jannah">
+                                            <label for="email">Email</label>
+                                            <input type="text" name="email" class="form-control" id="email" value="<?= $email ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputnama">Nama Lengkap</label>
-                                        <input type="text" name="nama" class="form-control" id="inputnama" placeholder="Muhammad Nuridul Umam">
+                                        <label for="id_lomba">Jenis Lomba</label>
+                                        <select class="form-control" id="id_lomba" name="id_lomba">
+                                            <?php
+                                                $sql_l = "SELECT `id_lomba`,`nama` FROM `data_lomba` ORDER BY `nama`";
+                                                $query_l = mysqli_query($koneksi,$sql_l);
+                                                while ($data_l = mysqli_fetch_row($query_l)) {
+                                                    $id_l   = $data_l[0];
+                                                    $nama_l = $data_l[1];
+                                                ?>
+                                                <option value="<?= $id_l ?>" <?php if($id_l==$id_lomba){echo "selected";} ?>><?= $nama_l ?></option>
+                                                <?php }
+                                            ?>
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="jenislomba">Jenis Lomba</label>
-                                        <input type="text" name="jenis-lomba" class="form-control" id="jenislomba" placeholder="Lomba WWWWW">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputuniv">Universitas</label>
-                                            <input type="text" name="universitas" class="form-control" id="inputuniv" placeholder="Universitas Brawijaya">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="inputCity">Kota</label>
-                                            <select id="inputprovinsi" name="kota" class="form-control">
-                                                <option selected>Choose...</option>
-                                                <option>...</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="inputprovinsi">Provinsi</label>
-                                            <select id="inputprovinsi" name="provinsi" class="form-control">
-                                                <option selected>Choose...</option>
-                                                <option>...</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-secondary">Edit Profile</button>
-                                    <button type="submit" class="btn btn-primary">Simpan Profile</button>
+                                    <!-- <button type="submit" class="btn btn-secondary">Edit Profile</button> -->
+                                    <button type="submit" name="submit" class="btn btn-primary">Simpan Profile</button>
                                 </form>
                             </div>
                         </div>
@@ -81,26 +108,11 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <?php include "include/script.php" ?>
+    <?php include "include/script.php" ?>
+
 </body>
 
 </html>
