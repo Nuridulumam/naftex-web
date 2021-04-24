@@ -79,6 +79,7 @@
                                     <div class="form-group">
                                         <label for="id_lomba">Jenis Lomba</label>
                                         <select class="form-control" id="id_lomba" name="id_lomba">
+                                            <option value="">-Pilih Lomba-</option>
                                             <?php
                                                 $sql_l = "SELECT `id_lomba`,`nama` FROM `data_lomba` ORDER BY `nama`";
                                                 $query_l = mysqli_query($koneksi,$sql_l);

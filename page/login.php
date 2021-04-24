@@ -18,7 +18,7 @@
               $_SESSION['level']=$level; 
               header("Location:../admin/index.php"); 
           } 
-      } else {$gagal=1;}
+      } else {$notif="gagal";}
   }
 ?>
 <!DOCTYPE html>
@@ -55,6 +55,11 @@
                     <div class="text-center">
                       <h1 class="h4 text-gray-900 mb-4"><b>Selamat datang di Portal Naftex</b></h1>
                     </div>
+                    <?php 
+                      if (isset($_GET["notif"])&&$_GET["notif"]=="berhasil") { ?>
+                        <div class="alert alert-success mt-3 text-center" role="alert"> Silahkan login untuk melanjutkan!</div>
+                      <?php } 
+                    ?>
                     <form class="user" method="post">
                       <div class="form-group">
                         <input type="username" class="form-control form-control-user" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Masukkan Username" name="username" />
@@ -63,7 +68,7 @@
                         <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Masukkan Password" name="password" />
                       </div>
                       <?php
-                        if (isset($gagal)&&$gagal=="1") {?>
+                        if (isset($notif)&&$notif=="gagal") {?>
                           <p class="text-danger text-center">Username/Password Salah!</p>
                         <?php }
                       ?>

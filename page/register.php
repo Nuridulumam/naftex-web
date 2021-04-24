@@ -1,3 +1,37 @@
+<?php
+	include('../koneksi/koneksi.php');
+    if (isset($_POST["register"])) {
+        if (!empty($_POST["nama"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["wa1"])&&!empty($_POST["password"])&&!empty($_POST["passwordk"])) {
+            $nama 		= $_POST["nama"];
+            $username 	= $_POST["username"];
+            $email   	= $_POST["email"];
+            $wa1    	= $_POST["wa1"];
+            $password 	= MD5($_POST["password"]);
+            $passwordk 	= MD5($_POST["passwordk"]);
+            //cek password
+            if ($password==$passwordk) {
+            	$q_nama = mysqli_query($koneksi, "SELECT `nama` FROM `user` WHERE `nama`='$nama'"); 
+			    $j_nama = mysqli_num_rows($q_nama);
+			    // cek nama
+	            if ($j_nama==0) {
+	            	$q_username = mysqli_query($koneksi, "SELECT `username` FROM `user` WHERE `username`='$username'"); 
+				    $j_username = mysqli_num_rows($q_username);
+				    //cek username
+				    if ($j_username==0) {
+				    	$s_reg = "INSERT INTO `user` (`nama`, `username`, `email`, `password`) VALUES ('$nama', '$username', '$email', '$password')";
+			            mysqli_query($koneksi,$s_reg);
+			            //get id_user
+			            $q_id = mysqli_query($koneksi, "SELECT `id_user` FROM `user` WHERE `username`='$username'"); 
+					    while($d_id = mysqli_fetch_row($q_id)){ $id_user = $d_id[0]; } 
+			            $s_reg2 = "INSERT INTO `data_peserta` (`id_user`, `wa1`) VALUES ('$id_user', '$wa1')";
+			            mysqli_query($koneksi,$s_reg2);
+						header("Location:login.php?notif=berhasil"); 
+				    }else {$notif = "Username telah terdaftar";}
+	            } else {$notif = "Nama Tim telah terdaftar";}
+            } else {$notif = "Password konfirmasi salah";}
+        } else {$notif = "Semua Data wajib diisi!";}
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,37 +63,38 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4"><b>Daftar Akun Naftex!</b></h1>
                 </div>
-                <form class="user">
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nama Depan" name="namaDepan" />
-                    </div>
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Nama Belakang" name="namaBelakang" />
-                    </div>
+                <form class="user" method="post">
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama Tim" name="nama" maxlength="50" required/>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="exampleInputUsername" placeholder="Username" name="username" />
+                    <input type="text" class="form-control form-control-user" id="username" placeholder="Username" name="username" minlength="5" required/>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" name="email" />
+                    <input type="email" class="form-control form-control-user" id="email" placeholder="Alamat Email" name="email" required/>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Nomor Whatsapp" name="nomorWhatsapp" />
+                    <input type="text" class="form-control form-control-user" id="wa1" placeholder="Nomor Whatsapp" name="wa1" maxlength="20" required/>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password" />
+                      <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="password" minlength="8" required/>
                     </div>
                     <div class="col-sm-6">
-                      <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Konfirmasi Password" name="konfirmasiPassword" />
+                      <input type="password" class="form-control form-control-user" id="passwordk" placeholder="Konfirmasi Password" name="passwordk" required/>
                     </div>
                   </div>
-                  <a href="login.html" class="btn btn-primary btn-user btn-block"> Daftar Akun </a>
+                  <?php 
+                  	if (isset($notif)) { ?>
+                  		<p class="text-danger text-center"><?= $notif ?></p>
+                  	<?php }
+                  ?>
+                  
+                  <button type="submit" name="register" class="btn btn-primary btn-user btn-block"> Daftar Akun</button>
                 </form>
                 <hr />
                 <div class="text-center">
-                  <a class="small" href="login.html"><b>Sudah punya akun? Login!</b></a>
+                  <a class="small" href="login.php"><b>Sudah punya akun? Login!</b></a>
                 </div>
               </div>
             </div>

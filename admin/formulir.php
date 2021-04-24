@@ -25,7 +25,7 @@
             $notif = "berhasil";
         } else {$notif = "gagal";}
     }
-    if (isset($_POST["submit-anggota1"])) {
+    if (isset($_POST["submit-anggota3"])) {
         if (!empty($_POST["nama3"])&&!empty($_POST["wa3"])&&!empty($_POST["univ3"])&&!empty($_POST["ttl3"])&&!empty($_POST["alamat3"])) {
             $nama   =$_POST["nama3"];
             $wa     =$_POST["wa3"];

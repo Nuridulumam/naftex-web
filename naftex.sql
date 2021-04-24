@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 11:09 AM
+-- Generation Time: Apr 24, 2021 at 07:54 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -77,7 +77,9 @@ CREATE TABLE `data_peserta` (
 --
 
 INSERT INTO `data_peserta` (`id_user`, `id_lomba`, `nama1`, `wa1`, `univ1`, `ttl1`, `alamat1`, `nama2`, `wa2`, `univ2`, `ttl2`, `alamat2`, `nama3`, `wa3`, `univ3`, `ttl3`, `alamat3`) VALUES
-(2, 1, 'Muhammad', '08521111 999', 'UB Coba', '11/11/9999', 'Jalan1 Coba', 'Sumanto', '085212345678999', 'Umum', '33/13/2077', 'Monas', 'Naufal', '08523333', 'UB', '33/33/3333', 'Jalan 3');
+(2, 1, 'Muhammad', '08521111 999', 'UB Coba', '11/11/9999', 'Jalan1 Coba', 'Sumanto', '085212345678999', 'Umum', '33/13/2077', 'Monas', 'Naufal', '08523333', 'UB', '33/33/3333', 'Jalan 3'),
+(3, 0, '', '088867678989', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(4, 4, 'Player 1', '080000003333', 'UB', '11/11/9999', 'Jalan1 Coba', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `email`, `level`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Naufal Ulinnuha', 'email@email.com', 'admin'),
-(2, 'peserta', '129451d83a60351a82516cb836842c68', 'Suicide Squad 9', 'peserta3@email.com', 'peserta');
+(2, 'peserta', '129451d83a60351a82516cb836842c68', 'Suicide Squad 9', 'peserta3@email.com', 'peserta'),
+(3, 'roket', '25d55ad283aa400af464c76d713c07ad', 'Tim Roket', 'roket@gmail.com', ''),
+(4, 'percobaan3', '3a586584a31d1e71105c4582b2aa7f86', 'Coba 3', 'percobaan3@gmail.com', '');
 
 --
 -- Indexes for dumped tables
@@ -140,7 +144,7 @@ ALTER TABLE `data_lomba`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
