@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2021 at 07:54 PM
+-- Generation Time: Apr 27, 2021 at 07:54 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -21,6 +21,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `naftex`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `level` varchar(50) NOT NULL,
+  `foto` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -53,8 +69,7 @@ INSERT INTO `data_lomba` (`id_lomba`, `nama`, `deskripsi1`, `deskripsi2`) VALUES
 --
 
 CREATE TABLE `data_peserta` (
-  `id_user` int(11) NOT NULL,
-  `id_lomba` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `nama1` varchar(50) NOT NULL,
   `wa1` varchar(15) NOT NULL,
   `univ1` varchar(50) NOT NULL,
@@ -76,10 +91,10 @@ CREATE TABLE `data_peserta` (
 -- Dumping data for table `data_peserta`
 --
 
-INSERT INTO `data_peserta` (`id_user`, `id_lomba`, `nama1`, `wa1`, `univ1`, `ttl1`, `alamat1`, `nama2`, `wa2`, `univ2`, `ttl2`, `alamat2`, `nama3`, `wa3`, `univ3`, `ttl3`, `alamat3`) VALUES
-(2, 1, 'Muhammad', '08521111 999', 'UB Coba', '11/11/9999', 'Jalan1 Coba', 'Sumanto', '085212345678999', 'Umum', '33/13/2077', 'Monas', 'Naufal', '08523333', 'UB', '33/33/3333', 'Jalan 3'),
-(3, 0, '', '088867678989', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(4, 4, 'Player 1', '080000003333', 'UB', '11/11/9999', 'Jalan1 Coba', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `data_peserta` (`username`, `nama1`, `wa1`, `univ1`, `ttl1`, `alamat1`, `nama2`, `wa2`, `univ2`, `ttl2`, `alamat2`, `nama3`, `wa3`, `univ3`, `ttl3`, `alamat3`) VALUES
+('admin', 'Admin 1', '081111101', 'UB', '11/11/9999', 'Rumah admin 1', 'Admin 2', '081111102', 'Umum', '33/13/2077', 'Monas', 'Admin 3', '081111103', 'UB', '33/33/3333', 'Jalan 3'),
+('peserta', '', '088867678989', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('roket', 'Player 1', '080000003333', 'UB', '11/11/9999', 'Jalan1 Coba', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -93,18 +108,18 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `level` varchar(50) NOT NULL
+  `foto` varchar(50) NOT NULL,
+  `id_lomba` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `email`, `level`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Naufal Ulinnuha', 'email@email.com', 'admin'),
-(2, 'peserta', '129451d83a60351a82516cb836842c68', 'Suicide Squad 9', 'peserta3@email.com', 'peserta'),
-(3, 'roket', '25d55ad283aa400af464c76d713c07ad', 'Tim Roket', 'roket@gmail.com', ''),
-(4, 'percobaan3', '3a586584a31d1e71105c4582b2aa7f86', 'Coba 3', 'percobaan3@gmail.com', '');
+INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `email`, `foto`, `id_lomba`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Tim Admin', 'percobaan1@gmail.com', 'admin', 2),
+(2, 'peserta', '129451d83a60351a82516cb836842c68', 'Suicide Squad 9', 'peserta3@email.com', 'peserta', 4),
+(3, 'roket', '25d55ad283aa400af464c76d713c07ad', 'Tim Roket', 'roket@gmail.com', '', 5);
 
 --
 -- Indexes for dumped tables
@@ -120,15 +135,15 @@ ALTER TABLE `data_lomba`
 -- Indexes for table `data_peserta`
 --
 ALTER TABLE `data_peserta`
-  ADD PRIMARY KEY (`id_user`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_lomba` (`id_lomba`);
+  ADD PRIMARY KEY (`username`),
+  ADD KEY `username` (`username`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -154,7 +169,7 @@ ALTER TABLE `user`
 -- Constraints for table `data_peserta`
 --
 ALTER TABLE `data_peserta`
-  ADD CONSTRAINT `data_peserta_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `data_peserta_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
