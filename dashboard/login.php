@@ -5,18 +5,33 @@
     $password = MD5($_POST["password"]);
 
     //cek username dan password 
-    $sql = "SELECT `id_user`,`username` FROM `user` WHERE `username`='$username' and `password`='$password'";
-    $query = mysqli_query($koneksi, $sql); 
-    $jumlah = mysqli_num_rows($query);
+    $query_u = mysqli_query($koneksi,"SELECT `id_user`,`username`,`level` FROM `user` WHERE `username`='$username' and `password`='$password'"); 
+    $jumlah_u = mysqli_num_rows($query_u);
+    $query_a = mysqli_query($koneksi,"SELECT `id_admin`,`username`,`level` FROM `admin` WHERE `username`='$username' and `password`='$password'"); 
+    $jumlah_a = mysqli_num_rows($query_a);
+    echo $jumlah_a;
 
-    if ($jumlah==1) {
+    if ($jumlah_u==1) {
       session_start(); 
-      while($data = mysqli_fetch_row($query)){ 
-          $id_user = $data[0];
-          $username = $data[1];
-          $_SESSION['id_user']=$id_user; 
-          $_SESSION['username']=$username; 
-          header("Location:index.php"); 
+      while($data = mysqli_fetch_row($query_u)){ 
+        $id_user  = $data[0];
+        $username = $data[1];
+        $level    = $data[2];
+        $_SESSION['id_user']  = $id_user; 
+        $_SESSION['username'] = $username; 
+        $_SESSION['level']    = $level; 
+        header("Location:index.php"); 
+      } 
+    } else if ($jumlah_a==1) {
+      session_start(); 
+      while($data = mysqli_fetch_row($query_a)){ 
+        $id_admin  = $data[0];
+        $username = $data[1];
+        $level    = $data[2];
+        $_SESSION['id_admin']  = $id_admin; 
+        $_SESSION['username'] = $username; 
+        $_SESSION['level']    = $level; 
+        header("Location:index.php"); 
       } 
     } else {$notif="gagal";}
   }

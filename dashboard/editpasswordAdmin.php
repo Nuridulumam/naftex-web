@@ -6,13 +6,13 @@
             $passl = MD5($_POST["passl"]);
             $passb = MD5($_POST["passb"]);
             //get password
-            $q_p = mysqli_query($koneksi, "SELECT `password` FROM `user` WHERE `id_user`='$id_user'"); 
+            $q_p = mysqli_query($koneksi, "SELECT `password` FROM `admin` WHERE `username`='$username'"); 
             while($d_p = mysqli_fetch_row($q_p)){ $pass = $d_p[0]; }
             //cek password lama
             if ($passl==$pass) {
                 //cek password baru
                 if ($passl!=$passb) {
-                    mysqli_query($koneksi,"UPDATE `user` SET `password`='$passb' WHERE `id_user`='$id_user'");
+                    mysqli_query($koneksi,"UPDATE `admin` SET `password`='$passb' WHERE `username`='$username'");
                 } else {$notif2 = "Password baru tidak boleh sama dengan password lama!";}
             }else {$notif1 = "Password salah!";}
         }
@@ -46,7 +46,7 @@
                             <div class="col-md-4">
                                 <form method="post">
                                     <?php
-                                        // $q_u = mysqli_query($koneksi, "SELECT `username` FROM `user` WHERE `id_user`='$id_user'"); 
+                                        // $q_u = mysqli_query($koneksi, "SELECT `username` FROM `admin` WHERE `username`='$username'"); 
                                         // while($d_u = mysqli_fetch_row($q_u)){ $username = $d_u[0]; }
                                     ?>
                                     <div class="form-group">

@@ -17,6 +17,9 @@
 
     <hr class="sidebar-divider d-none d-md-block" />
 
+    <?php 
+        if ($level=="peserta") {
+    ?>
     <!-- #USER -->
     <div class="sidebar-heading">User</div>
     <!-- Nav Item - Pofile -->
@@ -29,7 +32,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Halaman Profile:</h6>
                 <a class="collapse-item" href="bioTim.php">Biodata Tim</a>
-                <a class="collapse-item" href="formulir.php">Biodata Anggota</a>
+                <a class="collapse-item" href="bioAnggota.php">Biodata Anggota</a>
                 <a class="collapse-item" href="editpassword.php">Ubah Password</a>
             </div>
         </div>
@@ -82,8 +85,11 @@
 
     <hr class="sidebar-divider d-none d-md-block" />
     <!-- #Akhir USER -->
+    <?php } ?>
 
-
+    <?php 
+        if ($level=="admin"||$level=="superadmin") {
+    ?>
     <!-- #ADMIN & SuperADMIN -->
     <div class="sidebar-heading">Admin / SuperAdmin</div>
     <!-- Nav Item - Pofile -->
@@ -96,7 +102,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Halaman Profile:</h6>
                 <a class="collapse-item" href="bioAdmin.php">Biodata</a>
-                <a class="collapse-item" href="editpassword.php">Ubah Password</a>
+                <a class="collapse-item" href="editpasswordAdmin.php">Ubah Password</a>
             </div>
         </div>
     </li>
@@ -148,7 +154,7 @@
 
     <hr class="sidebar-divider d-none d-md-block" />
     <!-- #Akir ADMIN & SuperADMIN -->
-
+    <?php } ?>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

@@ -1,35 +1,32 @@
 <?php
 	include('../koneksi/koneksi.php');
     if (isset($_POST["register"])) {
-        if (!empty($_POST["nama"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["wa1"])&&!empty($_POST["password"])&&!empty($_POST["passwordk"])) {
-            $nama 		= $_POST["nama"];
-            $username 	= $_POST["username"];
-            $email   	= $_POST["email"];
-            $wa1    	= $_POST["wa1"];
-            $password 	= MD5($_POST["password"]);
-            $passwordk 	= MD5($_POST["passwordk"]);
-            //cek password
-            if ($password==$passwordk) {
-            	$q_nama = mysqli_query($koneksi, "SELECT `nama` FROM `user` WHERE `nama`='$nama'"); 
+      if (!empty($_POST["nama"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["wa1"])&&!empty($_POST["password"])&&!empty($_POST["passwordk"])) {
+        $nama 		= $_POST["nama"];
+        $username 	= $_POST["username"];
+        $email   	= $_POST["email"];
+        $wa1    	= $_POST["wa1"];
+        $password 	= MD5($_POST["password"]);
+        $passwordk 	= MD5($_POST["passwordk"]);
+        //cek password
+        if ($password==$passwordk) {
+        	$q_nama = mysqli_query($koneksi, "SELECT `nama` FROM `user` WHERE `nama`='$nama'"); 
 			    $j_nama = mysqli_num_rows($q_nama);
 			    // cek nama
-	            if ($j_nama==0) {
-	            	$q_username = mysqli_query($koneksi, "SELECT `username` FROM `user` WHERE `username`='$username'"); 
+          if ($j_nama==0) {
+          	$q_username = mysqli_query($koneksi, "SELECT `username` FROM `user` WHERE `username`='$username'"); 
 				    $j_username = mysqli_num_rows($q_username);
 				    //cek username
 				    if ($j_username==0) {
-				    	$s_reg = "INSERT INTO `user` (`nama`, `username`, `email`, `password`) VALUES ('$nama', '$username', '$email', '$password')";
-			            mysqli_query($koneksi,$s_reg);
-			            //get id_user
-			            $q_id = mysqli_query($koneksi, "SELECT `id_user` FROM `user` WHERE `username`='$username'"); 
-					    while($d_id = mysqli_fetch_row($q_id)){ $id_user = $d_id[0]; } 
-			            $s_reg2 = "INSERT INTO `data_peserta` (`id_user`, `wa1`) VALUES ('$id_user', '$wa1')";
-			            mysqli_query($koneksi,$s_reg2);
-						header("Location:login.php?notif=berhasil"); 
-				    }else {$notif = "Username telah terdaftar";}
-	            } else {$notif = "Nama Tim telah terdaftar";}
-            } else {$notif = "Password konfirmasi salah";}
-        } else {$notif = "Semua Data wajib diisi!";}
+		    	    mysqli_query($koneksi,"INSERT INTO `user` (`nama`, `username`, `email`, `password`,`level`) VALUES ('$nama', '$username', '$email', '$password','peserta')");
+              mysqli_query($koneksi,"INSERT INTO `data_peserta` (`username`, `wa1`) VALUES ('$username', '$wa1')");
+              mysqli_query($koneksi,"INSERT INTO `pembayaran_peserta` (`username`) VALUES ('$username')");
+              mysqli_query($koneksi,"INSERT INTO `file_peserta` (`username`) VALUES ('$username')");
+			        header("Location:login.php?notif=berhasil"); 
+		        }else {$notif = "Username telah terdaftar";}
+          } else {$notif = "Nama Tim telah terdaftar";}
+        } else {$notif = "Password konfirmasi salah";}
+      } else {$notif = "Semua Data wajib diisi!";}
     }
 ?>
 <!DOCTYPE html>
@@ -77,7 +74,6 @@
                   		<p class="text-danger text-center"><?= $notif ?></p>
                   	<?php }
                   ?>
-                  
                   <button type="submit" name="register" class="btn btn-primary btn-user btn-block"> Daftar Akun</button>
                 </form>
                 <hr />
