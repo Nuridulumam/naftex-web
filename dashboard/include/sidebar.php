@@ -137,20 +137,25 @@
             </div>
         </div>
     </li>
-    <!-- Nav Item - PengaturanUser -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageUser" aria-expanded="true" aria-controls="manageUser">
-            <i class="fas fa-fw fa-users"></i>
-            <span>PengaturanUser</span>
-        </a>
-        <div id="manageUser" class="collapse" aria-labelledby="headListPengaturanUser" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Halaman Pengaturan User:</h6>
-                <a class="collapse-item" href="pengaturanAdminSA.php">Admin & Superadmin</a>
-                <a class="collapse-item" href="pengaturanUserPS.php">Peserta</a>
-            </div>
-        </div>
-    </li>
+    <?php
+        if ($level=="superadmin") { ?>
+            <!-- Nav Item - PengaturanUser -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageUser" aria-expanded="true" aria-controls="manageUser">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>PengaturanUser</span>
+                </a>
+                <div id="manageUser" class="collapse" aria-labelledby="headListPengaturanUser" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Halaman Pengaturan User:</h6>
+                        <a class="collapse-item" href="pengaturanAdminSA.php">Admin & Superadmin</a>
+                        <a class="collapse-item" href="pengaturanUserPS.php">Peserta</a>
+                    </div>
+                </div>
+            </li>
+        <?php }
+    ?>
+    
 
     <hr class="sidebar-divider d-none d-md-block" />
     <!-- #Akir ADMIN & SuperADMIN -->

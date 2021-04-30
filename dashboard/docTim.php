@@ -1,8 +1,12 @@
+<?php
+    include('../koneksi/koneksi.php'); 
+    include('include/session.php'); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Dokumen Tim</title>
     <?php include "include/head.php" ?>
 </head>
 

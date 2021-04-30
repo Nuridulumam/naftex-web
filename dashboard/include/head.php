@@ -12,8 +12,6 @@
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet" />
     <style type="text/css">
-        .nav-item .nav-link {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important
-        }
+        .nav-item .nav-link {padding-top: 10px !important; padding-bottom: 10px !important}
+        .td-nomer   {width: 10px;}
     </style>
