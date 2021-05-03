@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 04:19 PM
+-- Generation Time: May 03, 2021 at 03:49 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -56,7 +56,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama`, `email`, `wa`, 
 CREATE TABLE `data_lomba` (
   `id_lomba` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `deskripsi1` varchar(50) NOT NULL,
+  `harga` varchar(50) NOT NULL,
   `deskripsi2` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,12 +64,12 @@ CREATE TABLE `data_lomba` (
 -- Dumping data for table `data_lomba`
 --
 
-INSERT INTO `data_lomba` (`id_lomba`, `nama`, `deskripsi1`, `deskripsi2`) VALUES
-(1, 'Lomba Mewarnai', '', ''),
-(2, 'Lomba Menggambar', '', ''),
-(3, 'Lomba Menyanyi', '', ''),
-(4, 'Lomba Puisi', '', ''),
-(5, 'Mboh lah', '', '');
+INSERT INTO `data_lomba` (`id_lomba`, `nama`, `harga`, `deskripsi2`) VALUES
+(1, 'Lomba Hacking', '123000', ''),
+(2, 'Lomba Menggambar', '110000', ''),
+(3, 'Lomba Menyanyi', '120000', ''),
+(4, 'Lomba Puisi', '130000', ''),
+(5, 'Mboh lah', '1000000', '');
 
 -- --------------------------------------------------------
 
@@ -116,8 +116,19 @@ CREATE TABLE `dokumen_peserta` (
   `username` varchar(50) NOT NULL,
   `proposal` varchar(100) NOT NULL,
   `sk` varchar(100) NOT NULL,
-  `ktm` varchar(100) NOT NULL
+  `ktm` varchar(100) NOT NULL,
+  `status_dokumen` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dokumen_peserta`
+--
+
+INSERT INTO `dokumen_peserta` (`username`, `proposal`, `sk`, `ktm`, `status_dokumen`) VALUES
+('admin', '', '', '', ''),
+('percobaan6', '', '', '', ''),
+('peserta', '', '', '', ''),
+('roket', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -137,8 +148,9 @@ CREATE TABLE `pembayaran_peserta` (
 --
 
 INSERT INTO `pembayaran_peserta` (`username`, `status_bayar`, `bukti_transfer`, `deskripsi2`) VALUES
-('admin', 'pending', 'admin_bukti.jpg', ''),
-('percobaan6', 'pending', 'percobaan6_bukti.jpg', '');
+('admin', 'berhasil', 'admin_bukti.jpg', ''),
+('percobaan6', 'berhasil', 'percobaan6_bukti.jpg', ''),
+('roket', 'belum', '', '');
 
 -- --------------------------------------------------------
 
@@ -164,8 +176,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `email`, `level`, `foto`, `id_lomba`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Tim Admin', 'percobaan1@gmail.com', 'peserta', 'admin_foto.jpg', 2),
 (2, 'peserta', '129451d83a60351a82516cb836842c68', 'Suicide Squad 9', 'peserta3@email.com', 'peserta', '', 4),
-(3, 'roket', '25d55ad283aa400af464c76d713c07ad', 'Tim Roket', 'roket@gmail.com', '', '', 5),
-(6, 'percobaan6', '8eaadf1e6edc7f52719050b83fa9c5e9', 'Percobaan 6', 'percobaan6@gmail.com', '', 'percobaan6_foto.jpg', 5);
+(3, 'roket', '9d168e9ae2170a3721cd3b8e7105fdef', 'Tim Roket', 'roket@gmail.com', 'peserta', '', 3),
+(6, 'percobaan6', '8eaadf1e6edc7f52719050b83fa9c5e9', 'Percobaan 6', 'percobaan6@gmail.com', 'peserta', 'percobaan6_foto.jpg', 5);
 
 --
 -- Indexes for dumped tables

@@ -11,7 +11,7 @@
                 while($data_f = mysqli_fetch_row($query_f)){ 
                   $foto = $data_f[0]; 
                   //menghapus foto 
-                  //unlink("assets/img/foto/$foto"); 
+                  unlink("assets/img/foto/$foto"); 
                 } 
             }
             //get bukti_pembayaran
@@ -21,10 +21,10 @@
                 while($data_b = mysqli_fetch_row($query_b)){ 
                   $bukti = $data_b[0]; 
                   //menghapus bukti pembayaran 
-                  //unlink("assets/img/bukti-pembayaran/$bukti"); 
+                  unlink("assets/img/bukti-pembayaran/$bukti"); 
                 } 
             } 
-            //mysqli_query($koneksi,"DELETE FROM `user` WHERE `username`='$usernamee'");
+            mysqli_query($koneksi,"DELETE FROM `user` WHERE `username`='$usernamee'");
             $hapus = "berhasil";
         } else {$hapus = "gagal";}
     }

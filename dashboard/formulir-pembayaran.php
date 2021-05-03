@@ -41,18 +41,16 @@
                     <?php 
                         $query_s = mysqli_query($koneksi,"SELECT `status_bayar` FROM `pembayaran_peserta` WHERE `username`='$username'");
                         while ($data_s = mysqli_fetch_row($query_s)) {$status_bayar   = $data_s[0];}
-
+                        $query_d = mysqli_query($koneksi,"SELECT `id_lomba` FROM `user` WHERE `username`='$username'");
+                        while ($data_d = mysqli_fetch_row($query_d)) {$id_lomba   = $data_d[0];}
+                        $query_l = mysqli_query($koneksi,"SELECT `nama` FROM `data_lomba` WHERE `id_lomba`='$id_lomba'");
+                        while ($data_l = mysqli_fetch_row($query_l)) {$nama_lomba = $data_l[0];}
+                    
                         if (empty($status_bayar)) {
                     ?>
                     <div class="container mt-2 mb-5 card bg-light shadow p-5">
                         <div class="row justify-content-center">
                             <div class="col-md-6 p-3 rounded-lg">
-                                <?php
-                                    $query_d = mysqli_query($koneksi,"SELECT `id_lomba` FROM `user` WHERE `username`='$username'");
-                                    while ($data_d = mysqli_fetch_row($query_d)) {$id_lomba   = $data_d[0];}
-                                    $query_l = mysqli_query($koneksi,"SELECT `nama` FROM `data_lomba` WHERE `id_lomba`='$id_lomba'");
-                                    while ($data_l = mysqli_fetch_row($query_l)) {$nama_lomba = $data_l[0];}
-                                ?>
                                 <form method="post">
                                     <div class="alert alert-primary mt-3" role="alert">Pastikan semua data sudah diisi dengan benar!</div>
                                     <div class="form-group">
@@ -65,11 +63,20 @@
                                     </div>
                                     <div>
                                         <?php
-                                        if      ($id_user>=1&&$id_user<=9)   {$biaya="Rp. 100.00".$id_user; }
-                                        else if ($id_user>=10&&$id_user<=99) {$biaya="Rp. 100.0".$id_user; }
+                                        //get harga
+                                        $query_h = mysqli_query($koneksi,"SELECT `harga` FROM `data_lomba` WHERE `id_lomba`='$id_lomba'");
+                                        while ($data_h = mysqli_fetch_row($query_h)) {$harga = $data_h[0];}
+                                        $biaya = "";
+                                        if ($id_user>=1&&$id_user<=9){
+                                            for ($i=0;$i<strlen($harga)-1;$i++) {$biaya=$biaya.$harga[$i];}
+                                        }
+                                        else if ($id_user>=10&&$id_user<=99){
+                                            for ($i=0;$i<strlen($harga)-2;$i++) {$biaya=$biaya.$harga[$i];}
+                                        }
                                         ?>
                                         <p>Biaya Pendaftaran : </p>
-                                        <h3><?= $biaya ?></h3>
+                                        <h3><?= "Rp.".$biaya.$id_user ?></h3>
+                                        <p><i>*Setelah klik bayar anda tidak bisa mengganti lomba</i></p>
                                     </div>
                                     <button class="btn btn-info float-right" type="submit" name="submit-bayar">Bayar</button>
                                 </form>
@@ -83,13 +90,21 @@
                     <div class="container mt-2 mb-5 card bg-light shadow p-5">
                         <div class="row justify-content-center">
                             <div class="col-md-6 p-3 rounded-lg">
+                                <?php
+                                    //get harga
+                                    $query_h = mysqli_query($koneksi,"SELECT `harga` FROM `data_lomba` WHERE `id_lomba`='$id_lomba'");
+                                    while ($data_h = mysqli_fetch_row($query_h)) {$harga = $data_h[0];}
+                                    $biaya = "";
+                                    if ($id_user>=1&&$id_user<=9){
+                                        for ($i=0;$i<strlen($harga)-1;$i++) {$biaya=$biaya.$harga[$i];}
+                                    }
+                                    else if ($id_user>=10&&$id_user<=99){
+                                        for ($i=0;$i<strlen($harga)-2;$i++) {$biaya=$biaya.$harga[$i];}
+                                    }
+                                ?>
                                 <h3>Status Pembayaran: <span class="badge badge-danger">Menunggu Pembayaran</span></h3>
                                 <p>Silahkan lakukan pembayaran ke nomor rekening 000000000000000 atas nama Nama sejumlah :</p>
-                                <?php
-                                    if      ($id_user>=1&&$id_user<=9)   {$biaya="Rp. 100.00".$id_user; }
-                                    else if ($id_user>=10&&$id_user<=99) {$biaya="Rp. 100.0".$id_user; }
-                                ?>
-                                <h3><?= $biaya ?></h3>
+                                <h3><?= "Rp.".$biaya.$id_user ?></h3>
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="nama">Jika anda sudah membayar, upload bukti pembayaran disini</label>

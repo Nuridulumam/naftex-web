@@ -101,8 +101,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <?php
+                                            $query_s = mysqli_query($koneksi,"SELECT `status_bayar` FROM `pembayaran_peserta` WHERE `username`='$username'");
+                                            while ($data_s = mysqli_fetch_row($query_s)) {$status_bayar   = $data_s[0];}
+                                        ?>
                                         <label for="id_lomba">Jenis Lomba</label>
-                                        <select class="form-control" id="id_lomba" name="id_lomba">
+                                        <select class="form-control" id="id_lomba" name="id_lomba" <?php if($status_bayar=="belum"){echo "disabled";} ?>>
                                             <option value="">-Pilih Lomba-</option>
                                             <?php
                                                 $sql_l = "SELECT `id_lomba`,`nama` FROM `data_lomba` ORDER BY `nama`";

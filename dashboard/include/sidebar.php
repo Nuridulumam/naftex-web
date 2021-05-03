@@ -137,6 +137,13 @@
             </div>
         </div>
     </li>
+    <!-- Nav Item - Website -->
+    <li class="nav-item">
+        <a class="nav-link" href="lomba.php">
+            <i class="fas fa-fw fa-trophy"></i>
+            <span>Lomba</span>
+        </a>
+    </li>
     <?php
         if ($level=="superadmin") { ?>
             <!-- Nav Item - PengaturanUser -->
