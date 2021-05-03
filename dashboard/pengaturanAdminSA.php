@@ -35,7 +35,7 @@
 <html lang="en">
 
 <head>
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Pengaturan Admin</title>
     <?php include "include/head.php" ?>
 </head>
 
