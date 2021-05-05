@@ -62,13 +62,19 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Halaman Pembayaran:</h6>
                 <a class="collapse-item" href="formulir-pembayaran.php">Formulir Pembayaran</a>
-                <a class="collapse-item" href="status-pembayaran.php">Status Pembayaran</a>
+                <!-- <a class="collapse-item" href="status-pembayaran.php">Status Pembayaran</a> -->
                 <a class="collapse-item" href="utilities-border.html">Cara Pembayaran</a>
             </div>
         </div>
     </li>
     <!-- Nav Item - Upload Berkas -->
     <li class="nav-item">
+        <a class="nav-link" href="docUpload.php">
+            <i class="fas fa-fw fa-upload"></i>
+            <span>Upload Dokumen</span>
+        </a>
+    </li>
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dokumenupload" aria-expanded="true" aria-controls="dokumenupload">
             <i class="fas fa-fw fa-money-bill-wave"></i>
             <span>Dokumen Upload</span>
@@ -81,7 +87,7 @@
                 <a class="collapse-item" href="utilities-border.html">Upload KTM</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <hr class="sidebar-divider d-none d-md-block" />
     <!-- #Akhir USER -->
@@ -137,7 +143,7 @@
             </div>
         </div>
     </li>
-    <!-- Nav Item - Website -->
+    <!-- Nav Item - Lomba -->
     <li class="nav-item">
         <a class="nav-link" href="lomba.php">
             <i class="fas fa-fw fa-trophy"></i>
